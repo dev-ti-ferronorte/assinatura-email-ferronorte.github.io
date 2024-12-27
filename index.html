@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assinatura E-mail Ferronorte</title>
+
+    <link href="src/fonts.cdnfonts.com_css_Montserrat.css" rel="stylesheet">
+
+    <script src="src/jquery-3.6.3.min.js"></script>
+    <script src="src/html2canvas.min.js"></script>
+
+    <style>
+        #assinatura {
+            background-image: url("src/Imagem1.png");
+            background-repeat: no-repeat;
+            height: 194px;
+            width: 543px;
+        }
+
+        #a_nome {
+            margin: 0px;
+            padding-left: 60px;
+            color: white;
+            padding-top: 42px;
+            font-size: large;
+            font-family: 'Montserrat';
+            font-weight: bold;
+        }
+
+        #a_cargo {
+            margin: 0px;
+            padding-left: 60px;
+            color: white;
+            font-family: 'Montserrat';
+        }
+
+        #a_emp {
+            margin: 0px;
+            padding-left: 60px;
+            color: white;
+            font-family: 'Montserrat';
+            font-size: small;
+        }
+
+        #a_tel {
+            margin: 0px;
+            padding-left: 85px;
+            padding-top: 15px;
+            color: white;
+            font-family: 'Montserrat';
+            font-size: small;
+        }
+
+        #a_whats {
+            margin: 0px;
+            padding-left: 85px;
+            padding-top: 3px;
+            color: white;
+            font-family: 'Montserrat';
+            font-size: small;
+        }
+
+        #a_email {
+            margin: 0px;
+            padding-left: 85px;
+            /*padding-top: 3px;*/
+            color: white;
+            font-family: 'Montserrat';
+            font-size: small;
+        }
+
+        #site {
+            margin: 0px;
+            padding-left: 85px;
+            padding-top: 3px;
+            color: white;
+            font-family: 'Montserrat';
+            font-size: small;
+        }
+
+        .w_input {
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <p style="border: 1px;">
+        <p>Tipo Assinatura</p>
+        <input class="input" type="radio" id="dir" name="tp_assin" value="dir" checked>
+        <label for="dir">Ferronorte Corporativo</label>
+        <input class="input" type="radio" id="industria" name="tp_assin" value="industria">
+        <label for="industria">Ferronorte Industrial</label>
+        <input class="input" type="radio" id="comer" name="tp_assin" value="comer">
+        <label for="comer">Ferronorte Comercial</label>
+        <!-- <p></p> -->
+        <p>
+            <label for="nome">Nome do Colaborador</label>
+            <input class="input w_input" type="text" name="nome" id="nome">
+        </p>
+        <p>
+            <label for="cargo">Cargo</label>
+            <input class="input w_input" type="text" name="cargo" id="cargo">
+        </p>
+        <p>
+            <label for="emp">Nome Filial</label>
+            <input class="input w_input" type="text" name="emp" id="emp">
+        </p>
+        <p>
+            <label for="tel">Telefone</label>
+            <input class="input w_input" type="tel" name="tel" id="tel">
+        </p>
+        <p>
+            <label for="ramal">Ramal do Colaborador</label>
+            <input class="input w_input" type="text" name="ramal" id="ramal">
+        </p>
+        <p>
+            <label for="whats">Celular/Whatsapp</label>
+            <input class="input w_input" type="tel" name="whats" id="whats">
+        </p>
+        <p>
+            <label for="email">E-mail</label>
+            <input class="input w_input" type="text" name="email" id="email">
+            <select class="input" name="dominio" id="dominio">
+                <option value="gferronorte.com.br">@gferronorte.com.br</option>
+                <option value="ferronorte.com.br">@ferronorte.com.br</option>
+                <option value="ferronorteindustrial.com.br">@ferronorteindustrial.com.br</option>
+                <option value="ferronorteslz.com.br">@ferronorteslz.com.br</option>
+            </select>
+        </p>
+    </form>
+
+    <div id="assinatura">
+        <p id="a_nome"></p>
+        <p id="a_cargo"></p>
+        <p id="a_emp"></p>
+        <p id="a_tel"></p>
+        <p id="a_whats"></p>
+        <p id="a_email"></p>
+        <p id="site"></p>
+    </div>
+    <p></p>
+
+    <button style="margin-bottom:10px;" type="button" onclick="download()">Gerar</button>
+    <button style="margin-bottom:10px;" id="download" type="button">Baixar</button>
+    <p></p>
+
+</body>
+
+<script>
+    $('.input').change(function () {
+        var tp_assin = $('input[name="tp_assin"]:checked').val();
+        if (tp_assin == 'dir') {
+            $('#assinatura').css('background-image', "url('src/Imagem1.png')");
+        } else if (tp_assin == 'industria') {
+            $('#assinatura').css('background-image', "url('src/Imagem2.png')");
+        } else {
+            $('#assinatura').css('background-image', "url('src/Imagem3.png')");
+        }
+
+        $('#a_nome').empty();
+        $('#a_nome').append($('#nome').val());
+
+        $('#a_cargo').empty();
+        $('#a_cargo').append($('#cargo').val());
+
+        $('#a_emp').empty();
+        $('#a_emp').append($('#emp').val());
+
+        $('#a_tel').empty();
+        $('#a_tel').append($('#tel').val());
+
+        $('#a_ramal').empty();
+        if ($('#ramal').val().length > 0) {
+            $('#a_tel').append(' • Ramal: ' + $('#ramal').val());
+        }
+
+        $('#a_whats').empty();
+        $('#a_whats').append($('#whats').val());
+
+        if ($('#whats').val().length == 0) {
+            $('#a_email').css('padding-top', '19px');
+        } else {
+            $('#a_email').css('padding-top', '3px');
+        }
+
+        $('#a_email').empty();
+        $('#site').empty();
+        if ($('#email').val().length > 0) {
+            $('#a_email').append($('#email').val() + '@' + $("#dominio").val());
+            $('#site').append('www.' + $('#dominio').val());
+        }
+    });
+</script>
+
+<script>
+    function download() {
+        $("canvas").remove();
+
+        var element = document.getElementById("assinatura");
+
+        html2canvas(element, { scale: 1 }).then(canvas => {
+            document.body.appendChild(canvas);
+        });
+    }
+</script>
+
+<script>
+    setUpDownloadPageAsImage();
+
+    function setUpDownloadPageAsImage() {
+        var element = document.getElementById("assinatura");
+
+        document.getElementById("download").addEventListener("click", function () {
+            html2canvas(element, { scale: 1 }).then(function (canvas) {
+                simulateDownloadImageClick(canvas.toDataURL(), 'assinatura.png');
+            });
+        });
+    }
+
+    function simulateDownloadImageClick(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download !== 'string') {
+            window.open(uri);
+        } else {
+            link.href = uri;
+            link.download = filename;
+            accountForFirefox(clickLink, link);
+        }
+    }
+
+    function clickLink(link) {
+        link.click();
+    }
+
+    function accountForFirefox(click) { // wrapper function
+        let link = arguments[1];
+        document.body.appendChild(link);
+        click(link);
+        document.body.removeChild(link);
+    }
+</script>
+
+</html>
